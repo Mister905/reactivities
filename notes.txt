@@ -4,6 +4,8 @@ dotnet --info // installation info
 dotnet -h // lists commands
 dotnet new // create a new .NET project or file
 
+*** API ***
+
 // Creating the ASP.NET Core solutions and projects using the DotNet CLI
 cd reactivities
 dotnet new sln // solutiion file inherits name of parent folder
@@ -149,3 +151,36 @@ public ValuesController(DataContext context)
 }
 
 Update the Controller methods
+
+
+*** CLIENT ***
+npx create-react-app client --use-npm --typescript
+In order to make API requests you need to run:
+cd API ->  dotnet watch run in a terminal window
+
+// Adding CORS support to the API
+API/Startup.cs
+
+services.AddCors(opt =>
+{
+    opt.AddPolicy("CorsPolicy", policy =>
+    {
+        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000")
+    })
+});
+
+AND
+
+app.UseCors("CorsPolicy");
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllers();
+})
+^ The ordering of the middleware is important!
+
+// Materialize
+cd client
+npm i materialize-css@next 
+npm i @types/materialize-css
+declare const M;
+index.js -> import 'materialize-css/dist/css/materialize.min.css'
