@@ -1,0 +1,151 @@
+touch .gitignore -> add examples
+
+dotnet --info // installation info
+dotnet -h // lists commands
+dotnet new // create a new .NET project or file
+
+// Creating the ASP.NET Core solutions and projects using the DotNet CLI
+cd reactivities
+dotnet new sln // solutiion file inherits name of parent folder
+dotnet new classlib -n Domain
+dotnet new classlib -n Application
+dotnet new classlib -n Persistence
+dotnet new webapi -n API
+
+// Creating the project references using the DotNet CLI
+dotnet sln add Domain/
+dotnet sln add Application/
+dotnet sln add Persistence/
+dotnet sln add API/
+dotnet sln list // lists the solution's project references
+
+// Application requires references to Domain and Persistence
+cd Application
+dotnet add reference ../Domain/
+dotnet add reference ../Persistence/
+
+// API requires reference to Application
+dotnet add reference ../Application/
+
+// Persistence requires reference to Domain
+cd persistence
+dotnet add reference ../Domain/
+
+// Required assets to build and debug are missing
+View -> Command Palette -> Generate Assets for Build and Debug
+^ Creates a .vscode folder than contains json files for launching and debugging
+
+// Hide bin and obj folders as they are dynamically generated
+File -> Preferences -> Settings -> "Exclude" -> Add Pattern
+**/bin
+**/obj
+
+API/Startup.cs
+Line 39 commment out app.UseHttpsRedirection();
+
+API/Properties/launchSettings.json
+Line 24 remove https url from "applicationUrl" property value
+
+API/WeatherForecast.cs // Remove
+API/Controllers/WeatherForecastController.cs // Remove
+
+API/ is the startup project
+dotnet run -p API/
+
+test API routes: 
+localhost:5000/api/values
+localhost:5000/api/values/1
+
+Create Class Entity inside Domain/
+
+touch Persistence/DataContext.cs
+View->Command Palette->Nuget Package Manager - Add Package
+Microsoft.EntityFrameworkCore -> 3.0.0
+Microsoft.EntityFrameworkCore.Sqlite -> 3.0.0
+
+https://stackoverflow.com/questions/54785951/unable-to-install-packages-using-dotnet-add-package/54798770#54798770
+
+Domain.csproj && Persistence.csproj -> <TargetFramework>netstandard2.1</TargetFramework>
+
+Persistence -> DataContext.cs -> Ctrl + . => usimg Microsoft.EntityFrameworkCore;
+
+Setup DataContext.cs
+
+API/Startup.cs
+
+Line 30 ->
+
+services.AddDbContext<DataContext>(opt => {
+    opt.UseSqlite(Configuration.GetConnectionString("DefaultConnection"))
+});
+
+API/appsettings.json
+"ConnectionStrings": {
+    "DefaultConnection": "Data source=reactivities.db"
+}
+
+dotnet tool install --global dotnet-ef --version 3.0
+
+View->Command Palette->Nuget Package Manager - Add Package
+Microsoft.EntityFrameworkCore.Design -> 3.0.0
+
+dotnet ef migrations add Init -p Persistence/ -s API/
+
+// Creating the Database
+
+API/Program
+
+public static void Main(string[] args)
+{
+    var host = CreateHostBuilder(args).Build();
+
+    using (var scope = host.Services.CreateScope())
+    {
+        var services = scope.ServiceProvider;
+        try
+        {
+            var context = services.GetRequiredService<DataContext>();
+            context.Database.Migrate();
+        }
+        catch (Exception ex)
+        {
+
+            var logger = services.GetRequiredService<ILogger<Program>>();
+            logger.LogError(ex, "An Error Occured During Migration");
+        }
+    }
+    host.Run();
+}
+
+
+cd API/
+dotnet watch run
+
+View -> Command Palette -> SQLite: Open Database
+
+
+// Seeding Data Using Entity Framework
+
+Persistence/DataContext.cs
+
+protected override void OnModelCreating(ModelBuilder builder)
+{
+    builder.Entity<Value>().HasData(new Value { Id = 1, Name = "Value 101" }),
+    builder.Entity<Value>().HasData(new Value { Id = 2, Name = "Value 102" }),
+    builder.Entity<Value>().HasData(new Value { Id = 3, Name = "Value 103" })
+}
+
+dotnet ef migrations add SeedValues -p Persistence/ -s API/
+
+
+// Using Dependency Injection
+
+API/Controllers/ValuesController
+
+private readonly DataContext _context;
+public ValuesController(DataContext context)
+{
+    this._context = context;
+}
+
+Update the Controller methods
