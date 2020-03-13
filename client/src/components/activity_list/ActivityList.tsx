@@ -29,18 +29,18 @@ const ActivityList: React.FC<IProps> = ({
                   <div className="row">
                     <div className="col m6">
                       <button
-                        onClick={() => handle_activity_selection(activity.id)}
-                        className="btn btn-custom"
-                      >
-                        View
-                      </button>
-                    </div>
-                    <div className="col m6">
-                      <button
                         onClick={() => handle_delete_activity(activity.id)}
                         className="btn red"
                       >
                         Delete
+                      </button>
+                    </div>
+                    <div className="col m6">
+                      <button
+                        onClick={() => handle_activity_selection(activity.id)}
+                        className="btn btn-custom"
+                      >
+                        View
                       </button>
                     </div>
                   </div>

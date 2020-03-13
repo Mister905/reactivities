@@ -225,3 +225,6 @@ services.AddMediatR(typeof(List.Handler).Assembly);
 	"city": "London",
 	"venue": "Tower of London"
 }
+
+** CLIENT API **
+mkdir /src/api

@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "./components/navbar/Navbar";
 import Dashboard from "./components/dashboard/Dashboard";
-import axios from "axios";
 import { IActivity } from "./models/activity";
+import Activities from "./api/activities";
+import moment from "moment";
 
 const App = () => {
   const [activities, set_activities] = useState<IActivity[]>([]);
@@ -27,25 +28,27 @@ const App = () => {
     set_create_mode(true);
   };
 
-  const handle_create_activity = (activity: IActivity) => {
+  const handle_create_activity = async (activity: IActivity) => {
+    const res = await Activities.create(activity);
     set_activities([...activities, activity]);
   };
 
-  const handle_update_activity = (activity: IActivity) => {
+  const handle_update_activity = async (activity: IActivity) => {
+    const res = await Activities.update(activity);
+
     set_activities([...activities.filter(a => a.id !== activity.id), activity]);
   };
 
-  const handle_delete_activity = (id: string) => {
+  const handle_delete_activity = async (id: string) => {
+    const res = await Activities.delete(id);
     set_activities([...activities.filter(a => a.id !== id)]);
   };
 
   useEffect(() => {
     const fetch_data = async () => {
-      const response = await axios.get<IActivity[]>(
-        "http://localhost:5000/api/activities"
-      );
+      const response = await Activities.list();
 
-      set_activities(response.data);
+      set_activities(response);
     };
 
     fetch_data();
