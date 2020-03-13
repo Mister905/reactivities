@@ -1,0 +1,26 @@
+@import "../../components/navbar/Navbar.scss";
+@import "../../components/dashboard/Dashboard.scss";
+@import "../../components/activity_list/ActivityList.scss";
+@import "../../components/activity_details/ActivityDetails.scss";
+
+* {
+  font-family: "Roboto", sans-serif;
+}
+
+.mt-25 {
+  margin-top: 25px;
+}
+
+.btn-wide {
+  width: 100%;
+}
+
+.btn-custom {
+  color: #5ba0ea !important;
+  background-color: #fff !important;
+  font-weight: bold;
+}
+
+.bold-text {
+  font-weight: bold;
+}

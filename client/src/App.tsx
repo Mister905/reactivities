@@ -1,60 +1,76 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import React, { useState, useEffect } from "react";
+import Navbar from "./components/navbar/Navbar";
+import Dashboard from "./components/dashboard/Dashboard";
 import axios from "axios";
+import { IActivity } from "./models/activity";
 
-class App extends Component {
-  state = {
-    values: []
+const App = () => {
+  const [activities, set_activities] = useState<IActivity[]>([]);
+
+  const [selected_activity, set_selected_activity] = useState<
+    IActivity | undefined
+  >(undefined);
+
+  const [create_mode, set_create_mode] = useState(false);
+
+  const [edit_mode, set_edit_mode] = useState(false);
+
+  const handle_activity_selection = (id: string) => {
+    set_selected_activity(activities.find(activity => activity.id === id));
+    set_edit_mode(false);
+    set_create_mode(false);
   };
 
-  componentDidMount = async () => {
-    const response = await axios.get("http://localhost:5000/api/values");
-
-    this.setState({
-      values: [
-        { id: 1, name: "Value 101" },
-        { id: 2, name: "Value 102" }
-      ]
-    });
+  const handle_open_create_form = () => {
+    set_selected_activity(undefined);
+    set_edit_mode(false);
+    set_create_mode(true);
   };
 
-  render() {
-    return (
-      <div>
-        <div className="row">
-          <div className="col s12 m6">
-            <div className="card blue-grey darken-1">
-              <div className="card-content white-text">
-                <span className="card-title">Card Title</span>
-                <p>
-                  I am a very simple card. I am good at containing small bits of
-                  information. I am convenient because I require little markup
-                  to use effectively.
-                </p>
-              </div>
-              <div className="card-action">
-                <a href="#">This is a link</a>
-                <a href="#">This is a link</a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <h4>
-          <i className="material-icons">add</i>Users
-        </h4>
-        <ul className="collection">
-          {this.state.values.map((value: any) => {
-            return (
-              <li className="collection-item" key={value.id}>
-                {value.name}
-              </li>
-            );
-          })}
-        </ul>
+  const handle_create_activity = (activity: IActivity) => {
+    set_activities([...activities, activity]);
+  };
+
+  const handle_update_activity = (activity: IActivity) => {
+    set_activities([...activities.filter(a => a.id !== activity.id), activity]);
+  };
+
+  const handle_delete_activity = (id: string) => {
+    set_activities([...activities.filter(a => a.id !== id)]);
+  };
+
+  useEffect(() => {
+    const fetch_data = async () => {
+      const response = await axios.get<IActivity[]>(
+        "http://localhost:5000/api/activities"
+      );
+
+      set_activities(response.data);
+    };
+
+    fetch_data();
+  }, []);
+
+  return (
+    <div>
+      <Navbar handle_open_create_form={handle_open_create_form} />
+      <div className="container">
+        <Dashboard
+          activities={activities}
+          handle_activity_selection={handle_activity_selection}
+          selected_activity={selected_activity}
+          set_selected_activity={set_selected_activity}
+          create_mode={create_mode}
+          set_create_mode={set_create_mode}
+          edit_mode={edit_mode}
+          set_edit_mode={set_edit_mode}
+          handle_create_activity={handle_create_activity}
+          handle_update_activity={handle_update_activity}
+          handle_delete_activity={handle_delete_activity}
+        />
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default App;
