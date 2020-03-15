@@ -1,5 +1,6 @@
 import React from "react";
 import { IActivity } from "../../models/activity";
+import moment from "moment";
 
 interface IProps {
   activities: IActivity[];
@@ -18,7 +19,7 @@ const ActivityList: React.FC<IProps> = ({
           <div key={activity.id} className="card">
             <div className="card-content">
               <span className="card-title">{activity.title}</span>
-              <p>{activity.date}</p>
+              <p>{moment(activity.date).format("MMMM Do YYYY")}</p>
               <p>{activity.city}</p>
               <p>{activity.venue}</p>
               <div className="row mt-25">

@@ -4,6 +4,7 @@ import { withFormik, FormikProps, Form, Field } from "formik";
 import { IActivity } from "../../models/activity";
 import { v4 as uuid } from "uuid";
 import moment from "moment";
+import Datepicker from "../datepicker/Datepicker";
 
 interface IProps {
   activity: IActivity;
@@ -22,7 +23,7 @@ interface FormValues {
   title: string;
   description: string;
   category: string;
-  // date: string;
+  date: string;
   city: string;
   venue: string;
 }
@@ -91,14 +92,14 @@ const InnerForm = (props: IProps & FormikProps<FormValues>) => {
           </div>
         </div>
 
-        {/* <div className="row">
+        <div className="row">
           <div className="input-field col m12">
             <Field
-              type="text"
-              id="date"
               name="date"
               className={errors.date ? "invalid" : ""}
+              component={Datepicker}
             />
+
             <label htmlFor="date" className="active">
               Date
             </label>
@@ -106,7 +107,7 @@ const InnerForm = (props: IProps & FormikProps<FormValues>) => {
               <span className="helper-text" data-error={errors.date}></span>
             )}
           </div>
-        </div> */}
+        </div>
 
         <div className="row">
           <div className="input-field col m12">
@@ -176,7 +177,7 @@ const ActivityForm = withFormik<IProps, FormValues>({
           title,
           description,
           category,
-          // date,
+          date,
           city,
           venue
         }
@@ -186,7 +187,7 @@ const ActivityForm = withFormik<IProps, FormValues>({
         title: title || "",
         description: description || "",
         category: category || "",
-        // date: date || "",
+        date: date || "",
         city: city || "",
         venue: venue || ""
       };
@@ -196,7 +197,7 @@ const ActivityForm = withFormik<IProps, FormValues>({
         title: "",
         description: "",
         category: "",
-        // date: "",
+        date: "",
         city: "",
         venue: ""
       };
@@ -207,15 +208,16 @@ const ActivityForm = withFormik<IProps, FormValues>({
     title: Yup.string().required("Title is required"),
     description: Yup.string().required("Description is required"),
     category: Yup.string().required("Category is required"),
-    // date: Yup.string().required("Date is required"),
+    date: Yup.string().required("Date is required"),
     city: Yup.string().required("City is required"),
     venue: Yup.string().required("Venue is required")
   }),
+
   validateOnBlur: false,
   validateOnChange: false,
 
   handleSubmit(
-    { id, title, description, category, city, venue }: FormValues,
+    { id, title, description, category, date, city, venue }: FormValues,
     {
       props: {
         create_mode,
@@ -233,7 +235,7 @@ const ActivityForm = withFormik<IProps, FormValues>({
         title,
         description,
         category,
-        date: moment().format(),
+        date: date,
         city,
         venue
       };
@@ -247,7 +249,7 @@ const ActivityForm = withFormik<IProps, FormValues>({
         title,
         description,
         category,
-        date: moment().format(),
+        date: date,
         city,
         venue
       };

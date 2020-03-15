@@ -1,5 +1,6 @@
 import React from "react";
 import { IActivity } from "../../models/activity";
+import moment from "moment";
 
 interface IProps {
   selected_activity: IActivity;
@@ -27,7 +28,7 @@ const ActivityDetails: React.FC<IProps> = ({
           <div className="row">
             <p>{selected_activity.description}</p>
             <p>{selected_activity.category}</p>
-            <p>{selected_activity.date}</p>
+            <p>{moment(selected_activity.date).format("MMMM Do YYYY")}</p>
             <p>{selected_activity.city}</p>
             <p>{selected_activity.venue}</p>
           </div>
