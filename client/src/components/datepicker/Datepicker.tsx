@@ -14,7 +14,6 @@ interface IProps {
 
 class Datepicker extends React.Component<IProps, {}> {
   componentDidMount() {
-    console.log(typeof(this.props.field.value));
     const datePickerOptions: Partial<M.DatepickerOptions> = {
       autoClose: true,
       defaultDate: moment(this.props.field.value).toDate(),

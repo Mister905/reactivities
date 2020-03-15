@@ -1,21 +1,28 @@
 import { Reducer } from "redux";
-// import { CharacterActions, CharacterActionTypes } from "../actions/character";
+import { ActivityActions, ActivityActionTypes } from "../actions/activity";
+import { IActivity } from "../models/activity";
 
-export interface IActivity {
-  name: string;
-  height: string;
-  mass: string;
-  hair_color: string;
-  skin_color: string;
-  eye_color: string;
-  birth_year: string;
-  gender: string;
-  homeworld: string;
-  films: string[];
-  species: string[];
-  vehicles: string[];
-  starships: string[];
-  created: string;
-  edited: string;
-  url: string;
+export interface IActivityState {
+  readonly activities: IActivity[];
 }
+
+const initial_activity_state: IActivityState = {
+  activities: []
+};
+
+export const activity_reducer: Reducer<IActivityState, ActivityActions> = (
+  state = initial_activity_state,
+  action
+) => {
+  const { type, payload } = action;
+  switch (type) {
+    case ActivityActionTypes.GET_ALL: {
+      return {
+        ...state,
+        activities: payload
+      };
+    }
+    default:
+      return state;
+  }
+};
