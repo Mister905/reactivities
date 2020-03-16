@@ -2,24 +2,18 @@ import React, { useState, useEffect } from "react";
 import Navbar from "./components/navbar/Navbar";
 import Dashboard from "./components/dashboard/Dashboard";
 import IActivity from "./data/activity/IActivity";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { get_activites } from "./actions/activity/ActivityActions";
-import { IAppState } from "./store";
 
 const App = () => {
+  
   const dispatch = useDispatch();
 
-  const activities = useSelector(
-    (state: IAppState) => state.activity.activities
-  );
+  const [] = useState<IActivity | undefined>(undefined);
 
-  const [selected_activity, set_selected_activity] = useState<
-    IActivity | undefined
-  >(undefined);
+  const [] = useState(false);
 
-  const [create_mode, set_create_mode] = useState(false);
-
-  const [edit_mode, set_edit_mode] = useState(false);
+  const [] = useState(false);
 
   // const handle_activity_selection = (id: string) => {
   //   set_selected_activity(activities.find(activity => activity.id === id));

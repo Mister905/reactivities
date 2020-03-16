@@ -24,11 +24,17 @@ export const activity_reducer: Reducer<IActivityState, ActivityActions> = (
         loading_activities: false
       };
     }
-    case ActivityActionTypes.GET_ACTIVITY: {
+    case ActivityActionTypes.SET_CURRENT_ACTIVITY: {
       return {
         ...state,
         selected_activity: action.payload,
         loading_selected_activity: false
+      };
+    }
+    case ActivityActionTypes.CLEAR_CURRENT_ACTIVITY: {
+      return {
+        ...state,
+        selected_activity: undefined
       };
     }
     case ActivityActionTypes.SET_CREATE_MODE: {
@@ -41,6 +47,14 @@ export const activity_reducer: Reducer<IActivityState, ActivityActions> = (
       return {
         ...state,
         edit_mode: action.payload
+      };
+    }
+    case ActivityActionTypes.OPEN_CREATE_FORM: {
+      return {
+        ...state,
+        selected_activity: undefined,
+        edit_mode: false,
+        create_mode: true
       };
     }
     default:

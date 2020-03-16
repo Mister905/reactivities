@@ -6,9 +6,13 @@ export interface IGetActivities {
   payload: IActivity[];
 }
 
-export interface IGetActivity {
-  type: ActivityActionTypes.GET_ACTIVITY;
+export interface ISetCurrentActivity {
+  type: ActivityActionTypes.SET_CURRENT_ACTIVITY;
   payload: IActivity;
+}
+
+export interface IClearCurrentActivity {
+  type: ActivityActionTypes.CLEAR_CURRENT_ACTIVITY;
 }
 
 export interface ISetCreateMode {
@@ -19,4 +23,12 @@ export interface ISetCreateMode {
 export interface ISetEditMode {
   type: ActivityActionTypes.SET_EDIT_MODE;
   payload: boolean;
+}
+
+export interface IOpenCreateForm {
+  type: ActivityActionTypes.OPEN_CREATE_FORM;
+}
+
+export interface IOpenEditForm {
+  type: ActivityActionTypes.OPEN_EDIT_FORM;
 }

@@ -6,9 +6,12 @@ import Activities from "../../api/activities";
 import ActivityActionTypes from "./ActivityActionTypes.enum";
 import {
   IGetActivities,
-  IGetActivity,
+  ISetCurrentActivity,
+  IClearCurrentActivity,
   ISetCreateMode,
-  ISetEditMode
+  ISetEditMode,
+  IOpenCreateForm,
+  IOpenEditForm
 } from "./IActivityActions";
 import IActivity from "../../data/activity/IActivity";
 
@@ -38,25 +41,31 @@ export const get_activites: ActionCreator<ThunkAction<
   };
 };
 
-export const get_activity: ActionCreator<ThunkAction<
+export const set_current_activity: ActionCreator<ThunkAction<
   Promise<any>,
   IActivityState,
-  null,
-  IGetActivity
+  IActivity,
+  ISetCurrentActivity
 >> = (activity: IActivity) => {
   return async (dispatch: Dispatch) => {
     try {
-      const get_activity = async (activity: IActivity) => {
+      const set_current_activity = async (activity: IActivity) => {
         const res = await Activities.details(activity.id);
         dispatch({
-          type: ActivityActionTypes.GET_ACTIVITY,
+          type: ActivityActionTypes.SET_CURRENT_ACTIVITY,
           payload: res
         });
       };
-      get_activity(activity);
+      set_current_activity(activity);
     } catch (err) {
       console.error(err);
     }
+  };
+};
+
+export const clear_current_activity = (): IClearCurrentActivity => {
+  return {
+    type: ActivityActionTypes.CLEAR_CURRENT_ACTIVITY
   };
 };
 
@@ -71,5 +80,17 @@ export const set_edit_mode = (is_edit_mode: boolean): ISetEditMode => {
   return {
     type: ActivityActionTypes.SET_EDIT_MODE,
     payload: is_edit_mode
+  };
+};
+
+export const open_create_form = (): IOpenCreateForm => {
+  return {
+    type: ActivityActionTypes.OPEN_CREATE_FORM
+  };
+};
+
+export const open_edit_form = (): IOpenEditForm => {
+  return {
+    type: ActivityActionTypes.OPEN_EDIT_FORM
   };
 };

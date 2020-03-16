@@ -1,15 +1,21 @@
 import {
   IGetActivities,
-  IGetActivity,
+  ISetCurrentActivity,
+  IClearCurrentActivity,
   ISetCreateMode,
-  ISetEditMode
+  ISetEditMode,
+  IOpenCreateForm,
+  IOpenEditForm
 } from "./IActivityActions";
 
 // Combine the action types with a union (we assume there are more)
 type ActivityActions =
   | IGetActivities
-  | IGetActivity
+  | ISetCurrentActivity
+  | IClearCurrentActivity
   | ISetCreateMode
-  | ISetEditMode;
+  | ISetEditMode
+  | IOpenCreateForm
+  | IOpenEditForm;
 
 export default ActivityActions;

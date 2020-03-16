@@ -3,31 +3,17 @@ import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import {
   get_activites,
-  get_activity
+  set_current_activity
 } from "../../actions/activity/ActivityActions";
 import { IAppState } from "../../store";
 
-interface IProps {
-  // activities: IActivity[];
-  // handle_activity_selection: (id: string) => void;
-  // handle_delete_activity: (id: string) => void;
-}
-const ActivityList: React.FC<IProps> = (
-  {
-    // activities,
-    // handle_activity_selection,
-    // handle_delete_activity
-  }
-) => {
+const ActivityList: React.FC = () => {
+  
   const dispatch = useDispatch();
 
   const activities = useSelector(
     (state: IAppState) => state.activity.activities
   );
-
-  useEffect(() => {
-    dispatch(get_activites());
-  }, []);
 
   return (
     <div>
@@ -56,7 +42,7 @@ const ActivityList: React.FC<IProps> = (
                     <div className="col m6">
                       <button
                         // onClick={() => handle_activity_selection(activity.id)}
-                        onClick={() => dispatch(get_activity(activity))}
+                        onClick={() => dispatch(set_current_activity(activity))}
                         className="btn btn-custom"
                       >
                         View

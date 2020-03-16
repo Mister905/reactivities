@@ -8,12 +8,12 @@ interface IProps {
   };
   field: {
     name: string;
-    value: string
+    value: string;
   };
 }
 
 class Datepicker extends React.Component<IProps, {}> {
-  componentDidMount() {
+  componentDidMount = () => {
     const datePickerOptions: Partial<M.DatepickerOptions> = {
       autoClose: true,
       defaultDate: moment(this.props.field.value).toDate(),
@@ -27,7 +27,7 @@ class Datepicker extends React.Component<IProps, {}> {
     const elem = document.querySelector("#date-picker")!;
 
     M.Datepicker.init(elem, datePickerOptions);
-  }
+  };
 
   render() {
     return (

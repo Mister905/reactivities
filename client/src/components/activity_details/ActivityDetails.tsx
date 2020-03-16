@@ -3,9 +3,13 @@ import IActivity from "../../data/activity/IActivity";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from "../../store";
+import {
+  set_edit_mode,
+  clear_current_activity
+} from "../../actions/activity/ActivityActions";
 
 const ActivityDetails: React.FC = () => {
-
+  
   const dispatch = useDispatch();
 
   const activity = useSelector((state: IAppState) => state.activity);
@@ -36,7 +40,7 @@ const ActivityDetails: React.FC = () => {
               <div className="col m10 offset-m1">
                 <div className="col m6">
                   <button
-                    // onClick={() => set_edit_mode(true)}
+                    onClick={() => dispatch(set_edit_mode(true))}
                     className="btn btn-wide"
                   >
                     Edit
@@ -44,7 +48,7 @@ const ActivityDetails: React.FC = () => {
                 </div>
                 <div className="col m6">
                   <button
-                    // onClick={() => set_selected_activity(undefined)}
+                    onClick={() => dispatch(clear_current_activity())}
                     className="btn btn-wide"
                   >
                     Cancel
@@ -56,9 +60,8 @@ const ActivityDetails: React.FC = () => {
         </div>
       </div>
     );
-  } else {
-    return null;
   }
+  return null;
 };
 
 export default ActivityDetails;
