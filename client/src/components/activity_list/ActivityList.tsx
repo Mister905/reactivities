@@ -1,17 +1,34 @@
-import React from "react";
-import { IActivity } from "../../models/activity";
+import React, { useEffect } from "react";
 import moment from "moment";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  get_activites,
+  get_activity
+} from "../../actions/activity/ActivityActions";
+import { IAppState } from "../../store";
 
 interface IProps {
-  activities: IActivity[];
-  handle_activity_selection: (id: string) => void;
-  handle_delete_activity: (id: string) => void;
+  // activities: IActivity[];
+  // handle_activity_selection: (id: string) => void;
+  // handle_delete_activity: (id: string) => void;
 }
-const ActivityList: React.FC<IProps> = ({
-  activities,
-  handle_activity_selection,
-  handle_delete_activity
-}) => {
+const ActivityList: React.FC<IProps> = (
+  {
+    // activities,
+    // handle_activity_selection,
+    // handle_delete_activity
+  }
+) => {
+  const dispatch = useDispatch();
+
+  const activities = useSelector(
+    (state: IAppState) => state.activity.activities
+  );
+
+  useEffect(() => {
+    dispatch(get_activites());
+  }, []);
+
   return (
     <div>
       {activities.map(activity => {
@@ -30,7 +47,7 @@ const ActivityList: React.FC<IProps> = ({
                   <div className="row">
                     <div className="col m6">
                       <button
-                        onClick={() => handle_delete_activity(activity.id)}
+                        // onClick={() => handle_delete_activity(activity.id)}
                         className="btn red"
                       >
                         Delete
@@ -38,7 +55,8 @@ const ActivityList: React.FC<IProps> = ({
                     </div>
                     <div className="col m6">
                       <button
-                        onClick={() => handle_activity_selection(activity.id)}
+                        // onClick={() => handle_activity_selection(activity.id)}
+                        onClick={() => dispatch(get_activity(activity))}
                         className="btn btn-custom"
                       >
                         View

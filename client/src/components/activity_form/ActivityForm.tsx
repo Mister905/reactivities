@@ -1,7 +1,7 @@
 import React from "react";
 import * as Yup from "yup";
 import { withFormik, FormikProps, Form, Field } from "formik";
-import { IActivity } from "../../models/activity";
+import IActivity from "../../data/activity/IActivity";
 import { v4 as uuid } from "uuid";
 import moment from "moment";
 import Datepicker from "../datepicker/Datepicker";
