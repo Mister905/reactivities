@@ -3,6 +3,7 @@ import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { set_current_activity } from "../../actions/activity/ActivityActions";
 import { IAppState } from "../../store";
+import Modal from "../modal/Modal";
 
 const ActivityList: React.FC = () => {
   
@@ -29,12 +30,7 @@ const ActivityList: React.FC = () => {
                 <div className="col m6">
                   <div className="row">
                     <div className="col m6">
-                      <button
-                        // onClick={() => handle_delete_activity(activity.id)}
-                        className="btn red"
-                      >
-                        Delete
-                      </button>
+                      <Modal activity={activity} />
                     </div>
                     <div className="col m6">
                       <button

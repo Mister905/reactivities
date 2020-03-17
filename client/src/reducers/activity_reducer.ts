@@ -2,7 +2,6 @@ import { Reducer } from "redux";
 import ActivityActions from "../actions/activity/ActivityActionTypes";
 import ActivityActionTypes from "../actions/activity/ActivityActionTypes.enum";
 import IActivityState from "../data/activity/IActivityState";
-import Activities from "../api/activities";
 
 const initial_activity_state: IActivityState = {
   activities: [],
@@ -76,6 +75,16 @@ export const activity_reducer: Reducer<IActivityState, ActivityActions> = (
           return activity;
         }),
         selected_activity: action.payload
+      };
+    }
+    case ActivityActionTypes.DELETE_ACTIVITY: {
+      return {
+        ...state,
+        activities: state.activities.filter(activity => {
+          if (activity.id !== action.payload.id) {
+            return activity;
+          }
+        })
       };
     }
     default:

@@ -42,3 +42,8 @@ export interface IUpdateActivity {
   type: ActivityActionTypes.UPDATE_ACTIVITY;
   payload: IActivity;
 }
+
+export interface IDeleteActivity {
+  type: ActivityActionTypes.DELETE_ACTIVITY;
+  payload: IActivity;
+}

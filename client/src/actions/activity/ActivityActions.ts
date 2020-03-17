@@ -13,7 +13,8 @@ import {
   IOpenCreateForm,
   IOpenEditForm,
   ICreateActivity,
-  IUpdateActivity
+  IUpdateActivity,
+  IDeleteActivity
 } from "./IActivityActions";
 import IActivity from "../../data/activity/IActivity";
 
@@ -104,6 +105,27 @@ export const update_activity = (activity: IActivity) => async (
     dispatch({
       type: ActivityActionTypes.UPDATE_ACTIVITY,
       payload: activity
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
+};
+
+export const delete_activity = (activity: IActivity) => async (
+  dispatch: Dispatch<IDeleteActivity | IGetActivities>
+) => {
+  try {
+    await Activities.delete(activity.id);
+
+    dispatch({
+      type: ActivityActionTypes.DELETE_ACTIVITY,
+      payload: activity
+    });
+
+    const res = await Activities.list();
+    dispatch({
+      type: ActivityActionTypes.GET_ACTIVITIES,
+      payload: res
     });
   } catch (error) {
     console.error(error.message);
