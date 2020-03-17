@@ -5,15 +5,8 @@ import ActivityDetails from "../activity_details/ActivityDetails";
 import ActivityForm from "../activity_form/ActivityForm";
 import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from "../../store";
-import {
-  create_activity,
-  update_activity
-} from "../../actions/activity/ActivityActions";
-import { store } from "../../store";
 
 const Dashboard: React.FC = () => {
-  const dispatch = useDispatch();
-
   const activity = useSelector((state: IAppState) => state.activity);
 
   return (
@@ -38,12 +31,7 @@ const Dashboard: React.FC = () => {
           {(activity.create_mode || activity.edit_mode) && (
             <div className="row">
               <div className="col m12">
-                <ActivityForm
-                  // activity={activity}
-                  // store={store}
-                  // create_activty={create_activity}
-                  // update_activity={update_activity}
-                />
+                <ActivityForm />
               </div>
             </div>
           )}

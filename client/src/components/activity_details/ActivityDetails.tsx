@@ -1,5 +1,4 @@
 import React from "react";
-import IActivity from "../../data/activity/IActivity";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from "../../store";

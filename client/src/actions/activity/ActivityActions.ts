@@ -1,7 +1,5 @@
 // Import redux types
-import { ActionCreator, Dispatch } from "redux";
-import { ThunkAction } from "redux-thunk";
-import IActivityState from "../../data/activity/IActivityState";
+import { Dispatch } from "redux";
 import Activities from "../../api/activities";
 import ActivityActionTypes from "./ActivityActionTypes.enum";
 import {
@@ -18,7 +16,6 @@ import {
 } from "./IActivityActions";
 import IActivity from "../../data/activity/IActivity";
 
-import { store } from "../../store";
 
 export const get_activites = () => async (
   dispatch: Dispatch<IGetActivities>

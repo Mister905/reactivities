@@ -7,8 +7,6 @@ const Navbar: React.FC = () => {
   
   const dispatch = useDispatch();
 
-  const activity = useSelector((state: IAppState) => state.activity);
-
   return (
     <div>
       <nav className="custom-nav">

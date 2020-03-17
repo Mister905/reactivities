@@ -1,9 +1,9 @@
-import React, { Component, Dispatch } from "react";
+import React, {  } from "react";
 import * as M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import IActivity from "../../data/activity/IActivity";
 import { delete_activity } from "../../actions/activity/ActivityActions";
-import { useDispatch, connect } from "react-redux";
+import { connect } from "react-redux";
 
 interface IProps {
   activity: IActivity;

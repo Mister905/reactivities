@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { set_current_activity } from "../../actions/activity/ActivityActions";
