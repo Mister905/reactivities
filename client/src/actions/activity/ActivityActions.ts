@@ -85,10 +85,10 @@ export const create_activity = (activity: IActivity) => async (
   dispatch: Dispatch<ICreateActivity>
 ) => {
   try {
-    const res = await Activities.create(activity);
+    await Activities.create(activity);
     dispatch({
       type: ActivityActionTypes.CREATE_ACTIVITY,
-      payload: res
+      payload: activity
     });
   } catch (error) {
     console.error(error);
@@ -99,12 +99,11 @@ export const update_activity = (activity: IActivity) => async (
   dispatch: Dispatch<IUpdateActivity>
 ) => {
   try {
-
-    const res = await Activities.update(activity);
+    await Activities.update(activity);
 
     dispatch({
       type: ActivityActionTypes.UPDATE_ACTIVITY,
-      payload: res
+      payload: activity
     });
   } catch (error) {
     console.error(error.message);

@@ -2,6 +2,7 @@ import { Reducer } from "redux";
 import ActivityActions from "../actions/activity/ActivityActionTypes";
 import ActivityActionTypes from "../actions/activity/ActivityActionTypes.enum";
 import IActivityState from "../data/activity/IActivityState";
+import Activities from "../api/activities";
 
 const initial_activity_state: IActivityState = {
   activities: [],
@@ -56,6 +57,25 @@ export const activity_reducer: Reducer<IActivityState, ActivityActions> = (
         selected_activity: undefined,
         edit_mode: false,
         create_mode: true
+      };
+    }
+    case ActivityActionTypes.CREATE_ACTIVITY: {
+      return {
+        ...state,
+        activities: [...state.activities, action.payload],
+        selected_activity: action.payload
+      };
+    }
+    case ActivityActionTypes.UPDATE_ACTIVITY: {
+      return {
+        ...state,
+        activities: state.activities.map(activity => {
+          if (activity.id === action.payload.id) {
+            return action.payload;
+          }
+          return activity;
+        }),
+        selected_activity: action.payload
       };
     }
     default:

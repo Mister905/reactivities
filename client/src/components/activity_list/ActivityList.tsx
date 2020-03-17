@@ -5,6 +5,7 @@ import { set_current_activity } from "../../actions/activity/ActivityActions";
 import { IAppState } from "../../store";
 
 const ActivityList: React.FC = () => {
+  
   const dispatch = useDispatch();
 
   const activities = useSelector(
