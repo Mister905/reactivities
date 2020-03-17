@@ -11,56 +11,42 @@ import {
   ISetCreateMode,
   ISetEditMode,
   IOpenCreateForm,
-  IOpenEditForm
+  IOpenEditForm,
+  ICreateActivity,
+  IUpdateActivity
 } from "./IActivityActions";
 import IActivity from "../../data/activity/IActivity";
 
-{
-  /* <Promise<Return Type>, State Interface, Type of Param, Type of Action> */
-}
-export const get_activites: ActionCreator<ThunkAction<
-  Promise<any>,
-  IActivityState,
-  null,
-  IGetActivities
->> = () => {
-  return async (dispatch: Dispatch) => {
-    try {
-      const get_all_activites = async () => {
-        const res = await Activities.list();
+import { store } from "../../store";
 
-        dispatch({
-          type: ActivityActionTypes.GET_ACTIVITIES,
-          payload: res
-        });
-      };
-      get_all_activites();
-    } catch (err) {
-      console.error(err);
-    }
-  };
+export const get_activites = () => async (
+  dispatch: Dispatch<IGetActivities>
+) => {
+  try {
+    const res = await Activities.list();
+
+    dispatch({
+      type: ActivityActionTypes.GET_ACTIVITIES,
+      payload: res
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-export const set_current_activity: ActionCreator<ThunkAction<
-  Promise<any>,
-  IActivityState,
-  IActivity,
-  ISetCurrentActivity
->> = (activity: IActivity) => {
-  return async (dispatch: Dispatch) => {
-    try {
-      const set_current_activity = async (activity: IActivity) => {
-        const res = await Activities.details(activity.id);
-        dispatch({
-          type: ActivityActionTypes.SET_CURRENT_ACTIVITY,
-          payload: res
-        });
-      };
-      set_current_activity(activity);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+export const set_current_activity = (activity: IActivity) => async (
+  dispatch: Dispatch<ISetCurrentActivity>
+) => {
+  try {
+    const res = await Activities.details(activity.id);
+
+    dispatch({
+      type: ActivityActionTypes.SET_CURRENT_ACTIVITY,
+      payload: res
+    });
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 export const clear_current_activity = (): IClearCurrentActivity => {
@@ -93,4 +79,34 @@ export const open_edit_form = (): IOpenEditForm => {
   return {
     type: ActivityActionTypes.OPEN_EDIT_FORM
   };
+};
+
+export const create_activity = (activity: IActivity) => async (
+  dispatch: Dispatch<ICreateActivity>
+) => {
+  try {
+    const res = await Activities.create(activity);
+    dispatch({
+      type: ActivityActionTypes.CREATE_ACTIVITY,
+      payload: res
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const update_activity = (activity: IActivity) => async (
+  dispatch: Dispatch<IUpdateActivity>
+) => {
+  try {
+
+    const res = await Activities.update(activity);
+
+    dispatch({
+      type: ActivityActionTypes.UPDATE_ACTIVITY,
+      payload: res
+    });
+  } catch (error) {
+    console.error(error.message);
+  }
 };

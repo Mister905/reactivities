@@ -28,7 +28,8 @@ export const activity_reducer: Reducer<IActivityState, ActivityActions> = (
       return {
         ...state,
         selected_activity: action.payload,
-        loading_selected_activity: false
+        loading_selected_activity: false,
+        create_mode: false
       };
     }
     case ActivityActionTypes.CLEAR_CURRENT_ACTIVITY: {

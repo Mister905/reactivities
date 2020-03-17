@@ -5,7 +5,9 @@ import {
   ISetCreateMode,
   ISetEditMode,
   IOpenCreateForm,
-  IOpenEditForm
+  IOpenEditForm,
+  ICreateActivity,
+  IUpdateActivity
 } from "./IActivityActions";
 
 // Combine the action types with a union (we assume there are more)
@@ -16,6 +18,8 @@ type ActivityActions =
   | ISetCreateMode
   | ISetEditMode
   | IOpenCreateForm
-  | IOpenEditForm;
+  | IOpenEditForm
+  | ICreateActivity
+  | IUpdateActivity;
 
 export default ActivityActions;

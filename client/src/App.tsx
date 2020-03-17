@@ -6,7 +6,6 @@ import { useDispatch } from "react-redux";
 import { get_activites } from "./actions/activity/ActivityActions";
 
 const App = () => {
-  
   const dispatch = useDispatch();
 
   const [] = useState<IActivity | undefined>(undefined);

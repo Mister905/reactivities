@@ -4,6 +4,7 @@ import { open_create_form } from "../../actions/activity/ActivityActions";
 import { IAppState } from "../../store";
 
 const Navbar: React.FC = () => {
+  
   const dispatch = useDispatch();
 
   const activity = useSelector((state: IAppState) => state.activity);

@@ -32,3 +32,13 @@ export interface IOpenCreateForm {
 export interface IOpenEditForm {
   type: ActivityActionTypes.OPEN_EDIT_FORM;
 }
+
+export interface ICreateActivity {
+  type: ActivityActionTypes.CREATE_ACTIVITY;
+  payload: IActivity;
+}
+
+export interface IUpdateActivity {
+  type: ActivityActionTypes.UPDATE_ACTIVITY;
+  payload: IActivity;
+}
