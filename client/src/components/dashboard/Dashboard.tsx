@@ -7,34 +7,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from "../../store";
 
 const Dashboard: React.FC = () => {
-  const activity = useSelector((state: IAppState) => state.activity);
-
   return (
     <div className="mt-25">
       <div className="row">
-        <div className="col m6">
+        <div className="col m8 offset-m2 center-align">
           <ActivityList />
-        </div>
-        <div className="col m5 offset-m1">
-          <div className="row">
-            <div className="col m12">
-              <h4 className="center-align">Activity Details</h4>
-            </div>
-          </div>
-
-          <div className="row">
-            <div className="col m12">
-              <ActivityDetails />
-            </div>
-          </div>
-
-          {(activity.create_mode || activity.edit_mode) && (
-            <div className="row">
-              <div className="col m12">
-                <ActivityForm />
-              </div>
-            </div>
-          )}
         </div>
       </div>
     </div>

@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from "../../store";
-import {
-  set_edit_mode,
-  clear_current_activity
-} from "../../actions/activity/ActivityActions";
+import { set_edit_mode } from "../../actions/activity/ActivityActions";
+import { withRouter, RouteComponentProps } from "react-router";
+import { set_current_activity } from "../../actions/activity/ActivityActions";
 
-const ActivityDetails: React.FC = () => {
-  
+interface MatchParams {
+  id: string;
+}
+
+interface IProps extends RouteComponentProps<MatchParams> {}
+
+const ActivityDetails: React.FC<IProps> = props => {
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(set_current_activity(props.match.params.id));
+  }, []);
 
   const activity = useSelector((state: IAppState) => state.activity);
 
@@ -39,7 +47,11 @@ const ActivityDetails: React.FC = () => {
               <div className="col m10 offset-m1">
                 <div className="col m6">
                   <button
-                    onClick={() => dispatch(set_edit_mode(true))}
+                    onClick={() =>
+                      props.history.push(
+                        `/activities/${activity.selected_activity?.id}/edit`
+                      )
+                    }
                     className="btn btn-wide"
                   >
                     Edit
@@ -47,7 +59,7 @@ const ActivityDetails: React.FC = () => {
                 </div>
                 <div className="col m6">
                   <button
-                    onClick={() => dispatch(clear_current_activity())}
+                    onClick={() => props.history.push("/activities")}
                     className="btn btn-wide"
                   >
                     Cancel
@@ -63,4 +75,4 @@ const ActivityDetails: React.FC = () => {
   return null;
 };
 
-export default ActivityDetails;
+export default withRouter(ActivityDetails);

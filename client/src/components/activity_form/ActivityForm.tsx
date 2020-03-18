@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as Yup from "yup";
 import IActivity from "../../data/activity/IActivity";
 import { v4 as uuid } from "uuid";
@@ -8,12 +8,14 @@ import {
   update_activity,
   set_create_mode,
   set_edit_mode,
-  set_current_activity
+  set_current_activity,
+  clear_current_activity
 } from "../../actions/activity/ActivityActions";
 import { Formik, Form, Field } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from "../../store";
 import moment from "moment";
+import { withRouter, RouteComponentProps } from "react-router";
 
 interface FormValues {
   id: string;
@@ -25,8 +27,23 @@ interface FormValues {
   venue: string;
 }
 
-const ActivityForm: React.FC<{}> = () => {
+interface MatchParams {
+  id: string;
+}
+
+interface IProps extends RouteComponentProps<MatchParams> {}
+
+const ActivityForm: React.FC<IProps> = props => {
+  
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (props.match.params.id) {
+      dispatch(set_current_activity(props.match.params.id));
+    } else {
+      dispatch(clear_current_activity());
+    }
+  }, [props.match.params.id]);
 
   const activity = useSelector((state: IAppState) => state.activity);
 
@@ -55,6 +72,7 @@ const ActivityForm: React.FC<{}> = () => {
       venue: venue || ""
     };
   } else {
+    console.log("test");
     initial_values = {
       id: "",
       title: "",
@@ -71,6 +89,7 @@ const ActivityForm: React.FC<{}> = () => {
       <Formik
         initialValues={initial_values}
         validationSchema={ActivitySchema}
+        enableReinitialize={true}
         validateOnBlur={false}
         validateOnChange={false}
         onSubmit={values => {
@@ -86,7 +105,7 @@ const ActivityForm: React.FC<{}> = () => {
               venue
             };
             dispatch(create_activity(new_activity));
-            dispatch(set_current_activity(new_activity));
+            dispatch(set_current_activity(new_activity.id));
             dispatch(set_create_mode(false));
           } else {
             const updated_activity: IActivity = {
@@ -100,7 +119,7 @@ const ActivityForm: React.FC<{}> = () => {
             };
 
             dispatch(update_activity(updated_activity));
-            dispatch(set_current_activity(updated_activity));
+            dispatch(set_current_activity(updated_activity.id));
             dispatch(set_edit_mode(false));
           }
         }}
@@ -263,4 +282,4 @@ const ActivityForm: React.FC<{}> = () => {
   );
 };
 
-export default ActivityForm;
+export default withRouter(ActivityForm);

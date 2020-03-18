@@ -32,11 +32,12 @@ export const get_activites = () => async (
   }
 };
 
-export const set_current_activity = (activity: IActivity) => async (
+export const set_current_activity = (activity_id: string) => async (
   dispatch: Dispatch<ISetCurrentActivity>
 ) => {
   try {
-    const res = await Activities.details(activity.id);
+    
+    const res = await Activities.details(activity_id);
 
     dispatch({
       type: ActivityActionTypes.SET_CURRENT_ACTIVITY,

@@ -1,42 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Navbar from "./components/navbar/Navbar";
-import Dashboard from "./components/dashboard/Dashboard";
-import IActivity from "./data/activity/IActivity";
 import { useDispatch } from "react-redux";
 import { get_activites } from "./actions/activity/ActivityActions";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+// Components
+import Home from "./components/home/Home";
+import Dashboard from "./components/dashboard/Dashboard";
+import ActivityForm from "./components/activity_form/ActivityForm";
+import ActivityDetails from "./components/activity_details/ActivityDetails";
 
-const App = () => {
+const App: React.FC = () => {
+  
   const dispatch = useDispatch();
-
-  const [] = useState<IActivity | undefined>(undefined);
-
-  const [] = useState(false);
-
-  const [] = useState(false);
-
-  // const handle_activity_selection = (id: string) => {
-  //   set_selected_activity(activities.find(activity => activity.id === id));
-  //   set_edit_mode(false);
-  //   set_create_mode(false);
-  // };
-
-  // const handle_open_create_form = () => {
-  //   set_selected_activity(undefined);
-  //   set_edit_mode(false);
-  //   set_create_mode(true);
-  // };
-
-  // const handle_create_activity = async (activity: IActivity) => {
-  //   set_activities([...activities, activity]);
-  // };
-
-  // const handle_update_activity = async (activity: IActivity) => {
-  //   set_activities([...activities.filter(a => a.id !== activity.id), activity]);
-  // };
-
-  // const handle_delete_activity = async (id: string) => {
-  //   set_activities([...activities.filter(a => a.id !== id)]);
-  // };
 
   useEffect(() => {
     dispatch(get_activites());
@@ -44,24 +19,21 @@ const App = () => {
 
   return (
     <div>
-      <Navbar
-      // handle_open_create_form={handle_open_create_form}
-      />
-      <div className="container">
-        <Dashboard
-        // activities={activities}
-        // handle_activity_selection={handle_activity_selection}
-        // selected_activity={selected_activity}
-        // set_selected_activity={set_selected_activity}
-        // create_mode={create_mode}
-        // set_create_mode={set_create_mode}
-        // edit_mode={edit_mode}
-        // set_edit_mode={set_edit_mode}
-        // handle_create_activity={handle_create_activity}
-        // handle_update_activity={handle_update_activity}
-        // handle_delete_activity={handle_delete_activity}
-        />
-      </div>
+      <Router>
+        <Navbar />
+        <div className="container">
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/activities" component={Dashboard} />
+            <Route exact path="/activities/create" component={ActivityForm} />
+            <Route exact path="/activities/:id" component={ActivityDetails} />
+            <Route
+              path={["/activities/create", "/activities/:id/edit"]}
+              component={ActivityForm}
+            />
+          </Switch>
+        </div>
+      </Router>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import "materialize-css/dist/css/materialize.min.css";
 import { Provider } from "react-redux";
 import { Store } from "redux";
 import { store, IAppState } from "./store";
+import { Router } from "react-router-dom";
 
 interface IProps {
   store: Store<IAppState>;
