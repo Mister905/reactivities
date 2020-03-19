@@ -6,11 +6,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Components
 import Home from "./components/home/Home";
 import Dashboard from "./components/dashboard/Dashboard";
-import ActivityForm from "./components/activity_form/ActivityForm";
+import CreateActivity from "./components/create_activity/CreateActivity";
+import EditActivity from "./components/edit_activity/EditActivity";
 import ActivityDetails from "./components/activity_details/ActivityDetails";
 
 const App: React.FC = () => {
-  
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,12 +25,9 @@ const App: React.FC = () => {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/activities" component={Dashboard} />
-            <Route exact path="/activities/create" component={ActivityForm} />
+            <Route exact path="/activities/create" component={CreateActivity} />
             <Route exact path="/activities/:id" component={ActivityDetails} />
-            <Route
-              path={["/activities/create", "/activities/:id/edit"]}
-              component={ActivityForm}
-            />
+            <Route exact path="/activities/:id/edit" component={EditActivity} />
           </Switch>
         </div>
       </Router>

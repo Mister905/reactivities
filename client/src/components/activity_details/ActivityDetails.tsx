@@ -2,9 +2,12 @@ import React, { useEffect } from "react";
 import moment from "moment";
 import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from "../../store";
-import { set_edit_mode } from "../../actions/activity/ActivityActions";
 import { withRouter, RouteComponentProps } from "react-router";
-import { set_current_activity } from "../../actions/activity/ActivityActions";
+import {
+  set_current_activity,
+  clear_current_activity
+} from "../../actions/activity/ActivityActions";
+import Preloader from "../preloader/Preloader";
 
 interface MatchParams {
   id: string;
@@ -13,15 +16,20 @@ interface MatchParams {
 interface IProps extends RouteComponentProps<MatchParams> {}
 
 const ActivityDetails: React.FC<IProps> = props => {
+  const activity = useSelector((state: IAppState) => state.activity);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(set_current_activity(props.match.params.id));
-  }, []);
+    if (props.match.params.id) {
+      dispatch(set_current_activity(props.match.params.id));
+    }
+    return () => {
+      dispatch(clear_current_activity());
+    };
+  }, [props.match.params.id]);
 
-  const activity = useSelector((state: IAppState) => state.activity);
-
-  if (activity.selected_activity && !activity.edit_mode) {
+  if (activity.selected_activity) {
     return (
       <div>
         <div className="card">
@@ -52,7 +60,7 @@ const ActivityDetails: React.FC<IProps> = props => {
                         `/activities/${activity.selected_activity?.id}/edit`
                       )
                     }
-                    className="btn btn-wide"
+                    className="btn btn-custom btn-wide"
                   >
                     Edit
                   </button>
@@ -60,7 +68,7 @@ const ActivityDetails: React.FC<IProps> = props => {
                 <div className="col m6">
                   <button
                     onClick={() => props.history.push("/activities")}
-                    className="btn btn-wide"
+                    className="btn btn-custom btn-wide"
                   >
                     Cancel
                   </button>
@@ -71,8 +79,15 @@ const ActivityDetails: React.FC<IProps> = props => {
         </div>
       </div>
     );
+  } else {
+    return (
+      <div className="row mt-50">
+        <div className="col m12 center-align">
+          <Preloader />
+        </div>
+      </div>
+    );
   }
-  return null;
 };
 
 export default withRouter(ActivityDetails);

@@ -6,9 +6,6 @@ import Modal from "../modal/Modal";
 import { Link } from "react-router-dom";
 
 const ActivityList: React.FC = () => {
-  
-  const dispatch = useDispatch();
-
   const activities = useSelector(
     (state: IAppState) => state.activity.activities
   );
@@ -23,14 +20,14 @@ const ActivityList: React.FC = () => {
               <p>{moment(activity.date).format("MMMM Do YYYY")}</p>
               <p>{activity.city}</p>
               <p>{activity.venue}</p>
-              <div className="row mt-25">
-                <div className="col m6 offset-m3">
-                  <div className="row">
+              <div className="row mt-25 mb-0">
+                <div className="col m10 offset-m1">
+                  <div className="row mb-0">
                     <div className="col m6">
                       <div className="chip">{activity.category}</div>
                     </div>
                     <div className="col m6">
-                      <div className="row">
+                      <div className="row mb-0">
                         <div className="col m6">
                           <Modal activity={activity} />
                         </div>

@@ -7,9 +7,7 @@ const initial_activity_state: IActivityState = {
   activities: [],
   loading_activities: true,
   selected_activity: undefined,
-  loading_selected_activity: true,
-  create_mode: false,
-  edit_mode: false
+  loading_selected_activity: true
 };
 
 export const activity_reducer: Reducer<IActivityState, ActivityActions> = (
@@ -28,34 +26,14 @@ export const activity_reducer: Reducer<IActivityState, ActivityActions> = (
       return {
         ...state,
         selected_activity: action.payload,
-        loading_selected_activity: false,
-        create_mode: false
+        loading_selected_activity: false
       };
     }
     case ActivityActionTypes.CLEAR_CURRENT_ACTIVITY: {
       return {
         ...state,
-        selected_activity: undefined
-      };
-    }
-    case ActivityActionTypes.SET_CREATE_MODE: {
-      return {
-        ...state,
-        create_mode: action.payload
-      };
-    }
-    case ActivityActionTypes.SET_EDIT_MODE: {
-      return {
-        ...state,
-        edit_mode: action.payload
-      };
-    }
-    case ActivityActionTypes.OPEN_CREATE_FORM: {
-      return {
-        ...state,
         selected_activity: undefined,
-        edit_mode: false,
-        create_mode: true
+        loading_selected_activity: true
       };
     }
     case ActivityActionTypes.CREATE_ACTIVITY: {

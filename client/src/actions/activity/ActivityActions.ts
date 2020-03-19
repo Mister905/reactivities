@@ -6,10 +6,10 @@ import {
   IGetActivities,
   ISetCurrentActivity,
   IClearCurrentActivity,
-  ISetCreateMode,
-  ISetEditMode,
-  IOpenCreateForm,
-  IOpenEditForm,
+  // ISetCreateMode,
+  // ISetEditMode,
+  // IOpenCreateForm,
+  // IOpenEditForm,
   ICreateActivity,
   IUpdateActivity,
   IDeleteActivity
@@ -51,32 +51,6 @@ export const set_current_activity = (activity_id: string) => async (
 export const clear_current_activity = (): IClearCurrentActivity => {
   return {
     type: ActivityActionTypes.CLEAR_CURRENT_ACTIVITY
-  };
-};
-
-export const set_create_mode = (is_create_mode: boolean): ISetCreateMode => {
-  return {
-    type: ActivityActionTypes.SET_CREATE_MODE,
-    payload: is_create_mode
-  };
-};
-
-export const set_edit_mode = (is_edit_mode: boolean): ISetEditMode => {
-  return {
-    type: ActivityActionTypes.SET_EDIT_MODE,
-    payload: is_edit_mode
-  };
-};
-
-export const open_create_form = (): IOpenCreateForm => {
-  return {
-    type: ActivityActionTypes.OPEN_CREATE_FORM
-  };
-};
-
-export const open_edit_form = (): IOpenEditForm => {
-  return {
-    type: ActivityActionTypes.OPEN_EDIT_FORM
   };
 };
 

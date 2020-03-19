@@ -15,23 +15,23 @@ export interface IClearCurrentActivity {
   type: ActivityActionTypes.CLEAR_CURRENT_ACTIVITY;
 }
 
-export interface ISetCreateMode {
-  type: ActivityActionTypes.SET_CREATE_MODE;
-  payload: boolean;
-}
+// export interface ISetCreateMode {
+//   type: ActivityActionTypes.SET_CREATE_MODE;
+//   payload: boolean;
+// }
 
-export interface ISetEditMode {
-  type: ActivityActionTypes.SET_EDIT_MODE;
-  payload: boolean;
-}
+// export interface ISetEditMode {
+//   type: ActivityActionTypes.SET_EDIT_MODE;
+//   payload: boolean;
+// }
 
-export interface IOpenCreateForm {
-  type: ActivityActionTypes.OPEN_CREATE_FORM;
-}
+// export interface IOpenCreateForm {
+//   type: ActivityActionTypes.OPEN_CREATE_FORM;
+// }
 
-export interface IOpenEditForm {
-  type: ActivityActionTypes.OPEN_EDIT_FORM;
-}
+// export interface IOpenEditForm {
+//   type: ActivityActionTypes.OPEN_EDIT_FORM;
+// }
 
 export interface ICreateActivity {
   type: ActivityActionTypes.CREATE_ACTIVITY;
