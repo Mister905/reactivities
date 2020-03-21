@@ -4,7 +4,6 @@ import { useDispatch } from "react-redux";
 import { get_activites } from "./actions/activity/ActivityActions";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 // Components
-import Home from "./components/home/Home";
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateActivity from "./components/create_activity/CreateActivity";
 import EditActivity from "./components/edit_activity/EditActivity";
@@ -15,7 +14,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     dispatch(get_activites());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
@@ -23,8 +22,7 @@ const App: React.FC = () => {
         <Navbar />
         <div className="container">
           <Switch>
-            <Route exact path="/" component={Home} />
-            <Route exact path="/activities" component={Dashboard} />
+            <Route exact path={["/", "/activities"]} component={Dashboard} />
             <Route exact path="/activities/create" component={CreateActivity} />
             <Route exact path="/activities/:id" component={ActivityDetails} />
             <Route exact path="/activities/:id/edit" component={EditActivity} />

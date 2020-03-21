@@ -2,10 +2,6 @@ import {
   IGetActivities,
   ISetCurrentActivity,
   IClearCurrentActivity,
-  // ISetCreateMode,
-  // ISetEditMode,
-  // IOpenCreateForm,
-  // IOpenEditForm,
   ICreateActivity,
   IUpdateActivity,
   IDeleteActivity
@@ -16,10 +12,6 @@ type ActivityActions =
   | IGetActivities
   | ISetCurrentActivity
   | IClearCurrentActivity
-  // | ISetCreateMode
-  // | ISetEditMode
-  // | IOpenCreateForm
-  // | IOpenEditForm
   | ICreateActivity
   | IUpdateActivity
   | IDeleteActivity;

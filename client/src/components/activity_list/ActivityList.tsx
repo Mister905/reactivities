@@ -1,53 +1,40 @@
-import React from "react";
-import moment from "moment";
-import { useSelector, useDispatch } from "react-redux";
+import React, { Fragment } from "react";
+
+import { useSelector } from "react-redux";
 import { IAppState } from "../../store";
-import Modal from "../modal/Modal";
-import { Link } from "react-router-dom";
+import ActivityListItem from "../activity_list_item/ActivityListItem";
+import moment from "moment";
 
 const ActivityList: React.FC = () => {
   const activities = useSelector(
     (state: IAppState) => state.activity.activities
   );
 
+  // Group Activities by Date
+  var activity_map: { [key: string]: any[] } = {};
+
+  for (let i = 0; i < activities.length; i++) {
+    const date = moment(activities[i].date).format("MM-DD-YYYY");
+
+    if (!activity_map[date]) {
+      activity_map[date] = [activities[i]];
+    } else {
+      activity_map[date].push(activities[i]);
+    }
+  }
+
   return (
     <div>
-      {activities.map(activity => {
-        return (
-          <div key={activity.id} className="card">
-            <div className="card-content">
-              <span className="card-title">{activity.title}</span>
-              <p>{moment(activity.date).format("MMMM Do YYYY")}</p>
-              <p>{activity.city}</p>
-              <p>{activity.venue}</p>
-              <div className="row mt-25 mb-0">
-                <div className="col m10 offset-m1">
-                  <div className="row mb-0">
-                    <div className="col m6">
-                      <div className="chip">{activity.category}</div>
-                    </div>
-                    <div className="col m6">
-                      <div className="row mb-0">
-                        <div className="col m6">
-                          <Modal activity={activity} />
-                        </div>
-                        <div className="col m6">
-                          <Link
-                            to={`/activities/${activity.id}`}
-                            className="btn btn-custom"
-                          >
-                            Details
-                          </Link>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
-      })}
+      {Object.keys(activity_map).map(key => (
+        <Fragment key={key}>
+          <div className="chip custom-chip">{moment(key).format("MMMM D, YYYY")}</div>
+          <Fragment>
+            {activity_map[key].map(activity => {
+              return <ActivityListItem key={activity.id} activity={activity} />;
+            })}
+          </Fragment>
+        </Fragment>
+      ))}
     </div>
   );
 };

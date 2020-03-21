@@ -1,4 +1,4 @@
-import React, {  } from "react";
+import React from "react";
 import * as M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import IActivity from "../../data/activity/IActivity";
@@ -21,21 +21,24 @@ class Modal extends React.Component<IProps, {}> {
       endingTop: "10%"
     };
 
-    const elem = document.querySelector("#delete_activity_modal")!;
+    const elems = document.querySelectorAll(".modal");
 
-    M.Modal.init(elem, options);
+    M.Modal.init(elems, options);
   }
 
   render() {
     return (
       <div>
-        <a
+        <button
           className="btn red modal-trigger"
-          data-target="delete_activity_modal"
+          data-target={`delete_activity_modal_${this.props.activity.id}`}
         >
           Delete
-        </a>
-        <div id="delete_activity_modal" className="modal">
+        </button>
+        <div
+          id={`delete_activity_modal_${this.props.activity.id}`}
+          className="modal"
+        >
           <div className="modal-content">
             <div className="row">
               <div className="col m12 center-align">
@@ -45,15 +48,16 @@ class Modal extends React.Component<IProps, {}> {
             </div>
           </div>
           <div className="modal-footer">
-            <a className="modal-close btn btn-custom btn-cancel-delete">
+            <button className="modal-close btn btn-custom btn-cancel-delete">
               Cancel
-            </a>
-            <a
+            </button>
+
+            <button
               onClick={() => this.props.delete_activity(this.props.activity)}
               className="modal-close btn btn-custom btn-confirm-delete"
             >
               Confirm
-            </a>
+            </button>
           </div>
         </div>
       </div>

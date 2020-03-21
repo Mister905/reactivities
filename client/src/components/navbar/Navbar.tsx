@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Logo from '../../assets/img/reactivities.png';
 
 const Navbar: React.FC = () => {
   return (
@@ -8,7 +9,7 @@ const Navbar: React.FC = () => {
         <div className="container">
           <div className="nav-wrapper">
             <Link to="/" className="brand-logo center">
-              Reactivities
+              <img src={Logo} alt="Logo" className="brand-logo-img responsive-img" />
             </Link>
 
             <ul id="nav-mobile" className="left hide-on-med-and-down">

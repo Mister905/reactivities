@@ -40,7 +40,8 @@ export const activity_reducer: Reducer<IActivityState, ActivityActions> = (
       return {
         ...state,
         activities: [...state.activities, action.payload],
-        selected_activity: action.payload
+        selected_activity: action.payload,
+        loading_selected_activity: true
       };
     }
     case ActivityActionTypes.UPDATE_ACTIVITY: {
@@ -52,7 +53,8 @@ export const activity_reducer: Reducer<IActivityState, ActivityActions> = (
           }
           return activity;
         }),
-        selected_activity: action.payload
+        selected_activity: action.payload,
+        loading_selected_activity: true
       };
     }
     case ActivityActionTypes.DELETE_ACTIVITY: {

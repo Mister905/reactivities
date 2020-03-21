@@ -3,7 +3,7 @@ import * as Yup from "yup";
 import IActivity from "../../data/activity/IActivity";
 import { v4 as uuid } from "uuid";
 import Datepicker from "../datepicker/Datepicker";
-import { create_activity } from "../../actions/activity/ActivityActions";
+import { create_activity, clear_current_activity } from "../../actions/activity/ActivityActions";
 import { Formik, Form, Field } from "formik";
 import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from "../../store";
@@ -73,7 +73,8 @@ const CreateActivity: React.FC<IProps> = props => {
             venue
           };
           dispatch(create_activity(new_activity));
-          props.history.push("/activities");
+          dispatch(clear_current_activity());
+          props.history.push(`/activities/${new_activity.id}`);
         }}
         render={formikBag => {
           const { errors } = formikBag;

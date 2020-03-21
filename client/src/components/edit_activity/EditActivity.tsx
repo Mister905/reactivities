@@ -4,7 +4,8 @@ import IActivity from "../../data/activity/IActivity";
 import Datepicker from "../datepicker/Datepicker";
 import {
   update_activity,
-  set_current_activity
+  set_current_activity,
+  clear_current_activity
 } from "../../actions/activity/ActivityActions";
 import { Formik, Form, Field } from "formik";
 import { useSelector, useDispatch } from "react-redux";
@@ -29,6 +30,7 @@ interface MatchParams {
 interface IProps extends RouteComponentProps<MatchParams> {}
 
 const EditActivity: React.FC<IProps> = props => {
+  
   const dispatch = useDispatch();
 
   const activity = useSelector((state: IAppState) => state.activity);
@@ -39,7 +41,7 @@ const EditActivity: React.FC<IProps> = props => {
     }
     let description = document.getElementById("description");
     M.textareaAutoResize(description as Element);
-  }, [props.match.params.id]);
+  }, [props.match.params.id, dispatch]);
 
   const ActivitySchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
@@ -92,7 +94,8 @@ const EditActivity: React.FC<IProps> = props => {
           };
 
           dispatch(update_activity(updated_activity));
-          props.history.push("/activities");
+          dispatch(clear_current_activity());
+          props.history.push(`/activities/${updated_activity.id}`);
         }}
         render={formikBag => {
           const { errors } = formikBag;
