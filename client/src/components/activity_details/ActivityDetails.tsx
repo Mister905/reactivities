@@ -39,8 +39,8 @@ const ActivityDetails: React.FC<IProps> = props => {
     );
   } else {
     return (
-      <div>
-        <div className="card">
+      <div className="row mt-50">
+        <div className="col m8 offset-m2 card">
           <div className="card-image">
             <img
               src={require(`../../assets/img/${activity.selected_activity.category}.jpg`)}

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Logo from '../../assets/img/reactivities.png';
+import Logo from "../../assets/img/reactivities.png";
 
 const Navbar: React.FC = () => {
   return (
@@ -9,18 +9,24 @@ const Navbar: React.FC = () => {
         <div className="container">
           <div className="nav-wrapper">
             <Link to="/" className="brand-logo center">
-              <img src={Logo} alt="Logo" className="brand-logo-img responsive-img" />
+              <img
+                src={Logo}
+                alt="Logo"
+                className="brand-logo-img responsive-img"
+              />
             </Link>
 
-            <ul id="nav-mobile" className="left hide-on-med-and-down">
+            <ul className="left hide-on-med-and-down">
               <li>
                 <Link to="/activities" className="bold-text">
                   Activities
                 </Link>
               </li>
+            </ul>
+            <ul className="right hide-on-med-and-down">
               <li>
                 <Link to="/activities/create" className="btn btn-custom">
-                  Create Activity
+                  Create
                   <i className="material-icons right create-activity-icon">
                     add
                   </i>

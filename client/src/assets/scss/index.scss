@@ -3,6 +3,7 @@
 @import "../../components/activity_list/ActivityList.scss";
 @import "../../components/activity_details/ActivityDetails.scss";
 @import "../../components/modal/Modal.scss";
+@import "../../components/activity_list_item/ActivityListItem.scss";
 
 * {
   font-family: "Roboto", sans-serif;
@@ -32,4 +33,12 @@
 
 .bold-text {
   font-weight: bold;
+}
+
+.flex {
+  display: flex;
+}
+
+.stretch {
+  align-self: stretch;
 }

@@ -1,0 +1,13 @@
+.activity-list-item-container {
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.activity-list-item-icon {
+    display: inline-block;
+    margin-right: 1rem;
+}
+
+.activity-list-item-child {
+    margin: 10px;
+}

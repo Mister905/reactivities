@@ -3,6 +3,24 @@
 }
 
 .custom-chip {
-  background-color: #23BBEA !important;
+  background-color: #23bbea !important;
   color: #fff !important;
+  margin-bottom: 25px !important;
+}
+
+.category-chip {
+  display: flex !important;
+  align-self: stretch;
+  justify-content: center;
+}
+
+.date-chip {
+  font-size: 1rem !important;
+  line-height: 42px !important;
+  height: 40px !important;
+  font-weight: bold !important;
+}
+
+.custom-divider {
+  margin: 25px 0px;
 }

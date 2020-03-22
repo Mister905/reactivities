@@ -27,11 +27,12 @@ const ActivityList: React.FC = () => {
     <div>
       {Object.keys(activity_map).map(key => (
         <Fragment key={key}>
-          <div className="chip custom-chip">{moment(key).format("MMMM D, YYYY")}</div>
+          <div className="chip custom-chip date-chip">{moment(key).format("MMMM D, YYYY")}</div>
           <Fragment>
             {activity_map[key].map(activity => {
               return <ActivityListItem key={activity.id} activity={activity} />;
             })}
+            <div className="divider custom-divider"></div>
           </Fragment>
         </Fragment>
       ))}
