@@ -3,6 +3,7 @@ import Navbar from "./components/navbar/Navbar";
 import { useDispatch } from "react-redux";
 import { get_activites } from "./actions/activity/ActivityActions";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Helmet } from "react-helmet";
 // Components
 import Dashboard from "./components/dashboard/Dashboard";
 import CreateActivity from "./components/create_activity/CreateActivity";
@@ -18,6 +19,9 @@ const App: React.FC = () => {
 
   return (
     <div>
+      <Helmet>
+        <style>{"body { background-color: #ececec; }"}</style>
+      </Helmet>
       <Router>
         <Navbar />
         <div className="container">

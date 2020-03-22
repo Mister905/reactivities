@@ -15,7 +15,6 @@ const Navbar: React.FC = () => {
                 className="brand-logo-img responsive-img"
               />
             </Link>
-
             <ul className="left hide-on-med-and-down">
               <li>
                 <Link to="/activities" className="bold-text">

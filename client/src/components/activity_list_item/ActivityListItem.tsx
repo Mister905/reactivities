@@ -12,17 +12,17 @@ interface IProps {
 const ActivityListItem: React.FC<IProps> = ({ activity }) => {
   return (
     <div className="row">
-      <div className="col m12 card">
+      <div className="col s12 m12 card">
         <div className="card-content">
           <div className="row">
-            <div className="col m12 s12">
+            <div className="col s12 m4">
               <img
-                src={require(`../../assets/img/${activity.category}.jpg`)}
+                src={require(`../../assets/img/user.png`)}
                 alt={`${activity.category}`}
-                className="responsive-img"
+                className="responsive-img circle"
               />
             </div>
-            <div className="col m12 s12">
+            <div className="col s12 m8">
               <div className="row">
                 <div className="col m12 s12 center-align">
                   <div className="flex activity-list-item-container">
@@ -43,7 +43,7 @@ const ActivityListItem: React.FC<IProps> = ({ activity }) => {
                       {activity.city}
                     </div>
                     <div className="activity-list-item-child stretch">
-                      <div className="chip custom-chip category-chip">
+                      <div className="chip custom-chip category-chip bold-text">
                         {activity.category}
                       </div>
                     </div>
@@ -63,6 +63,13 @@ const ActivityListItem: React.FC<IProps> = ({ activity }) => {
                     Details
                   </Link>
                 </div>
+              </div>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col s12 m12 card attendee-list-card z-depth-2">
+              <div className="card-content grey-text">
+                <p>Attendees</p>
               </div>
             </div>
           </div>

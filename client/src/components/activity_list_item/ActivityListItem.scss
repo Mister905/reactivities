@@ -1,13 +1,21 @@
 .activity-list-item-container {
-    flex-direction: column;
-    align-items: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .activity-list-item-icon {
-    display: inline-block;
-    margin-right: 1rem;
+  display: inline-block;
+  margin-right: 1rem;
 }
 
 .activity-list-item-child {
-    margin: 10px;
+  margin: 10px;
+}
+
+.category-chip {
+  font-size: 1rem;
+}
+
+.attendee-list-card {
+  background-color: #F4F6F8 !important;
 }
