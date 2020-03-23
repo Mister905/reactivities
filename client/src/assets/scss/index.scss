@@ -1,12 +1,53 @@
+@import "../scss/mixins";
 @import "../../components/navbar/Navbar.scss";
 @import "../../components/dashboard/Dashboard.scss";
 @import "../../components/activity_list/ActivityList.scss";
 @import "../../components/activity_details/ActivityDetails.scss";
 @import "../../components/modal/Modal.scss";
 @import "../../components/activity_list_item/ActivityListItem.scss";
+@import "../../components/activity_details/header/Header.scss";
+@import "../../components//activity_details/chat/Chat.scss";
+@import "../../components/activity_details/sidebar/Sidebar.scss";
+@import "../../components/home/Home.scss";
 
-* {
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  /* This prevents padding and borders being added to the elements specified height/width */
+  box-sizing: border-box;
   font-family: "Roboto", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  /* Some users will increase the default font-size of their browser */
+  /* This is a responsive way to account for these users instead of hardcoding 10px */
+  // Largest to Smallest Order is Important or Multiple Max-Width Queries will Apply
+  box-sizing: border-box;
+  font-size: 62.5%;
+
+  @include responsive(tablet_landscape) {
+    font-size: 70%;
+  }
+
+  @include responsive(tablet_portrait) {
+    font-size: 60%;
+  }
+
+  @include responsive(phone) {
+    font-size: 50%;
+  }
+
+  @include responsive(large_desktop) {
+    font-size: 80%;
+  }
 }
 
 .mt-25 {

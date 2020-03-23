@@ -1,0 +1,30 @@
+.activity-details-header-col {
+  @include responsive(tablet_landscape) {
+    width: 100% !important;
+    margin-left: auto;
+    left: auto;
+    right: auto;
+  }
+}
+
+.activity-details-header-btn {
+  @include responsive(tablet_portrait) {
+    width: 100%;
+  }
+}
+
+.activity-detail-card {
+  margin: 0 !important;
+}
+
+.row-mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.activity-details-collection {
+  margin: 25px 10px !important;
+}

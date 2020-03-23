@@ -1,0 +1,35 @@
+/* 
+MEDIA QUERY MANAGER
+0px - 600px         Phone
+600px - 900px       Tablet Portrait
+900px - 1200px      Tablet Landscape
+1200px - 1800px     Normal Styles Applied
+1800px -            Big Desktop  
+
+em is the optimal unit for responsive breakpoints
+1em = 16px
+divide the units by 16 e.g. 600px / 16px = 37.5em
+*/
+
+@mixin responsive($breakpoint) {
+  @if $breakpoint == phone {
+    @media only screen and (max-width: 37.5em) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet_landscape {
+    @media only screen and (max-width: 75em) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet_portrait {
+    @media only screen and (max-width: 56.25em) {
+      @content;
+    }
+  }
+  @if $breakpoint == large_desktop {
+    @media only screen and (min-width: 112.5em) {
+      @content;
+    }
+  }
+}

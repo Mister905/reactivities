@@ -35,22 +35,24 @@ const ActivityDetails: React.FC<IProps> = props => {
 
   if (activity.loading_selected_activity || !activity.selected_activity) {
     return (
-      <div className="row mt-50">
-        <div className="col m12 center-align">
-          <Preloader />
+      <div className="container">
+        <div className="row mt-50">
+          <div className="col m12 center-align">
+            <Preloader />
+          </div>
         </div>
       </div>
     );
   } else {
     return (
-      <div>
+      <div className="container">
         <div className="row mt-25">
-          <div className="col m8">
-            <Header />
-            <Info />
+          <div className="col m7">
+            <Header activity={activity.selected_activity} />
+            <Info activity={activity.selected_activity} />
             <Chat />
           </div>
-          <div className="col m4">
+          <div className="col m5">
             <Sidebar />
           </div>
         </div>

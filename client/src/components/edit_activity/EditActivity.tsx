@@ -30,7 +30,6 @@ interface MatchParams {
 interface IProps extends RouteComponentProps<MatchParams> {}
 
 const EditActivity: React.FC<IProps> = props => {
-  
   const dispatch = useDispatch();
 
   const activity = useSelector((state: IAppState) => state.activity);
@@ -65,7 +64,7 @@ const EditActivity: React.FC<IProps> = props => {
   };
 
   return (
-    <div>
+    <div className="container">
       <Formik
         initialValues={initial_values}
         validationSchema={ActivitySchema}
