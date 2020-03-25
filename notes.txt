@@ -226,5 +226,27 @@ services.AddMediatR(typeof(List.Handler).Assembly);
 	"venue": "Tower of London"
 }
 
-** CLIENT API **
-mkdir /src/api
+
+// Adding API Validation using Fluent Validation package
+View -> Command Palette -> Nuget Package Manager -> FluentValidation.AspNetCore -> Application.csproj -> restore
+
+Create validator class 
+e.g. Application -> Activities -> Create.cs -> public class CommandValidator : AbstractValidator<Command>
+
+API -> Startup.cs
+services.AddControllers()
+.AddFluentValidation(config =>
+{
+    config.RegisterValidatorsFromAssemblyContaining<Create>();
+});
+
+We only need to specify one particular class to register all the validators in services
+
+// API Exception Handling
+mkdir Application/Errors
+touch RestException.cs
+mkdir API/Middleware
+touch ErrorHandling.cs
+API/Startup.cs
+app.UseMiddleware<ErrorHandling>();
+using Core 3.0 or above it would appear that you have to remove [ApiController] from ActivitiesController.cs

@@ -8,6 +8,7 @@ import { connect } from "react-redux";
 interface IProps {
   activity: IActivity;
   delete_activity: (activity: IActivity) => void;
+  style?: string;
 }
 
 class Modal extends React.Component<IProps, {}> {
@@ -30,7 +31,11 @@ class Modal extends React.Component<IProps, {}> {
     return (
       <div>
         <button
-          className="btn red modal-trigger"
+          className={
+            this.props.style
+              ? `btn red modal-trigger ${this.props.style}`
+              : "btn red modal-trigger"
+          }
           data-target={`delete_activity_modal_${this.props.activity.id}`}
         >
           Delete

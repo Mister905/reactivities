@@ -28,3 +28,31 @@
 .activity-details-collection {
   margin: 25px 10px !important;
 }
+
+.custom-card-image {
+  -webkit-transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}
+
+.custom-card-image:hover {
+  opacity: 0.5;
+  .edit-activity-icon {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+.edit-activity-icon {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  visibility: hidden;
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+  transition: all 0.3s ease-in;
+}

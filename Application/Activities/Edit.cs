@@ -1,6 +1,9 @@
 using System;
+using System.Net;
 using System.Threading;
 using System.Threading.Tasks;
+using Application.Errors;
+using FluentValidation;
 using MediatR;
 using Persistence;
 
@@ -25,6 +28,19 @@ namespace Application.Activities
             public string Venue { get; set; }
         }
 
+        public class CommandValidator : AbstractValidator<Command>
+        {
+            public CommandValidator()
+            {
+                RuleFor(x => x.Title).NotEmpty();
+                RuleFor(x => x.Description).NotEmpty();
+                RuleFor(x => x.Category).NotEmpty();
+                RuleFor(x => x.Date).NotEmpty();
+                RuleFor(x => x.City).NotEmpty();
+                RuleFor(x => x.Venue).NotEmpty();
+            }
+        }
+
         public class Handler : IRequestHandler<Command>
         {
             private readonly DataContext _context;
@@ -41,7 +57,7 @@ namespace Application.Activities
 
                 if (activity == null)
                 {
-                    throw new Exception("Could not find activity");
+                    throw new RestException(HttpStatusCode.NotFound, new { activity = "Not Found" });
                 }
 
                 /* The null-coalescing operator ?? returns the value of its left-hand operand if it isn't null; otherwise, it evaluates the right-hand operand and returns its result. The ?? operator doesn't evaluate its right-hand operand if the left-hand operand evaluates to non-null.

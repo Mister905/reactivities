@@ -1,7 +1,12 @@
 import axios, { AxiosResponse } from "axios";
 import IActivity from "../data/activity/IActivity";
+import { history } from "../index";
 
 axios.defaults.baseURL = "http://localhost:5000/api";
+
+axios.interceptors.response.use(undefined, error => {
+  history.push("/404");
+});
 
 const response_body = (response: AxiosResponse) => response.data;
 

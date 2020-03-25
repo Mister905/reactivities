@@ -6,6 +6,10 @@ import "materialize-css/dist/css/materialize.min.css";
 import { Provider } from "react-redux";
 import { Store } from "redux";
 import { store, IAppState } from "./store";
+import { Router } from "react-router-dom";
+import { createBrowserHistory } from "history";
+
+export const history = createBrowserHistory();
 
 interface IProps {
   store: Store<IAppState>;
@@ -14,7 +18,9 @@ interface IProps {
 const Root: React.FC<IProps> = props => {
   return (
     <Provider store={props.store}>
-      <App />
+      <Router history={history}>
+        <App />
+      </Router>
     </Provider>
   );
 };

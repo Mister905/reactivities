@@ -24,18 +24,6 @@ export const get_activites = () => async (
         moment(b.date).valueOf() - moment(a.date).valueOf()
     );
 
-    // var map: any = {};
-
-    // for (let i = 0; i < sorted.length; i++) {
-    //   const date = moment(sorted[i].date).format("MM-DD-YYYY");
-
-    //   if (!map[date]) {
-    //     map[date] = [sorted[i]];
-    //   } else {
-    //     map[date].push(sorted[i]);
-    //   }
-    // }
-
     dispatch({
       type: ActivityActionTypes.GET_ACTIVITIES,
       payload: sorted
@@ -51,12 +39,14 @@ export const set_current_activity = (activity_id: string) => async (
   try {
     const res = await Activities.details(activity_id);
 
-    dispatch({
-      type: ActivityActionTypes.SET_CURRENT_ACTIVITY,
-      payload: res
-    });
+    if (res) {
+      dispatch({
+        type: ActivityActionTypes.SET_CURRENT_ACTIVITY,
+        payload: res
+      });
+    }
   } catch (error) {
-    console.error(error);
+    throw error;
   }
 };
 

@@ -1,5 +1,4 @@
 import React from "react";
-import Modal from "../modal/Modal";
 import { Link } from "react-router-dom";
 import moment from "moment";
 import IActivity from "../../data/activity/IActivity";
@@ -52,10 +51,7 @@ const ActivityListItem: React.FC<IProps> = ({ activity }) => {
               </div>
 
               <div className="row">
-                <div className="col m6 s6 center-align">
-                  <Modal activity={activity} />
-                </div>
-                <div className="col m6 s6 center-align">
+                <div className="col m6 offset-m6 s6 offset-s6 center-align">
                   <Link
                     to={`/activities/${activity.id}`}
                     className="btn btn-custom"

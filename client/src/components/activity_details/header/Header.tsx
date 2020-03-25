@@ -1,6 +1,8 @@
 import React from "react";
 import IActivity from "../../../data/activity/IActivity";
 import moment from "moment";
+import SVGIcon from "../../svg_icon/SVGIcon";
+import { Link } from "react-router-dom";
 
 interface IProps {
   activity: IActivity;
@@ -13,7 +15,10 @@ const Header: React.FC<IProps> = ({ activity }) => {
         <div className="col card m12">
           <div className="row">
             <div className="card activity-detail-card">
-              <div className="card-image">
+              <div className="card-image custom-card-image">
+                <Link to={`/activities/${activity.id}/edit`}>
+                  <SVGIcon icon="edit" style={"edit-activity-icon"} />
+                </Link>
                 <img
                   src={require("../../../assets/img/placeholder.png")}
                   className="responsive-img"

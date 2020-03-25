@@ -12,6 +12,7 @@ import Header from "./header/Header";
 import Info from "./info/Info";
 import Chat from "./chat/Chat";
 import Sidebar from "./sidebar/Sidebar";
+import Modal from "../modal/Modal";
 
 interface MatchParams {
   id: string;
@@ -25,13 +26,21 @@ const ActivityDetails: React.FC<IProps> = props => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (props.match.params.id) {
-      dispatch(set_current_activity(props.match.params.id));
+    // Create an scoped async function in the hook
+    async function set_current_activity_async() {
+      try {
+        const res = await dispatch(set_current_activity(props.match.params.id));
+      } catch (error) {
+        props.history.push("/404");
+      }
     }
+    // Execute the created function directly
+    set_current_activity_async();
+
     return () => {
       dispatch(clear_current_activity());
     };
-  }, [props.match.params.id, dispatch]);
+  }, [props.match.params.id, dispatch, props.history]);
 
   if (activity.loading_selected_activity || !activity.selected_activity) {
     return (
@@ -51,6 +60,11 @@ const ActivityDetails: React.FC<IProps> = props => {
             <Header activity={activity.selected_activity} />
             <Info activity={activity.selected_activity} />
             <Chat />
+            <div className="row">
+              <div className="col m12">
+                <Modal activity={activity.selected_activity} style={"delete-activity-btn"} />
+              </div>
+            </div>
           </div>
           <div className="col m5">
             <Sidebar />
@@ -58,56 +72,6 @@ const ActivityDetails: React.FC<IProps> = props => {
         </div>
       </div>
     );
-    // return (
-    //   <div className="row mt-50">
-    //     <div className="col m8 offset-m2 card">
-    //       <div className="card-image">
-    //         <img
-    //           src={require(`../../assets/img/${activity.selected_activity.category}.jpg`)}
-    //           alt={`${activity.selected_activity.category}`}
-    //         />
-    //         <span className="card-title custom-card-title">
-    //           {activity.selected_activity.title}
-    //         </span>
-    //       </div>
-    //       <div className="card-content">
-    //         <div className="row">
-    //           <p>{activity.selected_activity.description}</p>
-    //           <p>{activity.selected_activity.category}</p>
-    //           <p>
-    //             {moment(activity.selected_activity.date).format("MMMM Do YYYY")}
-    //           </p>
-    //           <p>{activity.selected_activity.city}</p>
-    //           <p>{activity.selected_activity.venue}</p>
-    //         </div>
-    //         <div className="row">
-    //           <div className="col m10 offset-m1">
-    //             <div className="col m6">
-    //               <button
-    //                 onClick={() =>
-    //                   props.history.push(
-    //                     `/activities/${activity.selected_activity?.id}/edit`
-    //                   )
-    //                 }
-    //                 className="btn btn-custom btn-wide"
-    //               >
-    //                 Edit
-    //               </button>
-    //             </div>
-    //             <div className="col m6">
-    //               <button
-    //                 onClick={() => props.history.push("/activities")}
-    //                 className="btn btn-custom btn-wide"
-    //               >
-    //                 Cancel
-    //               </button>
-    //             </div>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // );
   }
 };
 

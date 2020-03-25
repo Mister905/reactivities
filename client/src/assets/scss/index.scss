@@ -9,6 +9,7 @@
 @import "../../components//activity_details/chat/Chat.scss";
 @import "../../components/activity_details/sidebar/Sidebar.scss";
 @import "../../components/home/Home.scss";
+@import "../../components/not_found/NotFound.scss";
 
 *,
 *::after,
@@ -51,11 +52,11 @@ html {
 }
 
 .mt-25 {
-  margin-top: 25px;
+  margin-top: 2.5rem !important;
 }
 
 .mt-50 {
-  margin-top: 50px;
+  margin-top: 5rem !important;
 }
 
 .mb-0 {
