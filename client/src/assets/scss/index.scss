@@ -10,6 +10,8 @@
 @import "../../components/activity_details/sidebar/Sidebar.scss";
 @import "../../components/home/Home.scss";
 @import "../../components/not_found/NotFound.scss";
+@import "../../components/create_activity/CreateActivity.scss";
+@import "../../components/datepicker/Datepicker.scss";
 
 *,
 *::after,
@@ -83,4 +85,26 @@ html {
 
 .stretch {
   align-self: stretch;
+}
+
+/* label focus color */
+.custom-input-field input:focus + label {
+  color: #5ba0ea !important;
+  font-weight: bold !important;
+}
+/* label underline focus color */
+.custom-input-field input:focus {
+  border-bottom: 1px solid #5ba0ea !important;
+  box-shadow: 0 1px 0 0 #5ba0ea !important;
+}
+
+/* label focus color */
+.custom-input-field textarea:focus + label {
+  color: #5ba0ea !important;
+  font-weight: bold !important;
+}
+/* label underline focus color */
+.custom-input-field textarea:focus {
+  border-bottom: 1px solid #5ba0ea !important;
+  box-shadow: 0 1px 0 0 #5ba0ea !important;
 }

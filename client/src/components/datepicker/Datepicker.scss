@@ -1,0 +1,26 @@
+#datepicker-wrapper {
+  .datepicker-date-display {
+    background-color: #5ba0ea !important;
+  }
+  .datepicker-cancel,
+  .datepicker-clear,
+  .datepicker-today,
+  .datepicker-done {
+    color: #5ba0ea !important;
+  }
+  .datepicker-table td.is-selected {
+    background-color: #5ba0ea !important;
+    color: #fff;
+  }
+
+  .is-today {
+    color: #5ba0ea !important;
+    .datepicker-day-button {
+      font-weight: bold;
+    }
+  }
+
+  .is-today.is-selected {
+    color: #fff !important;
+  }
+}

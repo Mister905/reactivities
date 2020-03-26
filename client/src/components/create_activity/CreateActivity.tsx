@@ -12,6 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { IAppState } from "../../store";
 import moment from "moment";
 import { withRouter, RouteComponentProps } from "react-router";
+import * as M from "materialize-css";
 
 interface FormValues {
   id: string;
@@ -34,10 +35,15 @@ const CreateActivity: React.FC<IProps> = props => {
 
   const activity = useSelector((state: IAppState) => state.activity);
 
+  document.addEventListener("DOMContentLoaded", function() {
+    var elems = document.querySelectorAll("select");
+    var instances = M.FormSelect.init(elems, undefined);
+  });
+
   const ActivitySchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
     description: Yup.string().required("Description is required"),
-    category: Yup.string().required("Category is required"),
+    // category: Yup.string().required("Category is required"),
     date: Yup.string().required("Date is required"),
     city: Yup.string().required("City is required"),
     venue: Yup.string().required("Venue is required")
@@ -49,7 +55,7 @@ const CreateActivity: React.FC<IProps> = props => {
     id: "",
     title: "",
     description: "",
-    category: "",
+    category: "drinks",
     date: moment().format(),
     city: "",
     venue: ""
@@ -65,6 +71,7 @@ const CreateActivity: React.FC<IProps> = props => {
         validateOnChange={false}
         onSubmit={values => {
           const { title, description, category, date, city, venue } = values;
+          console.log("test");
 
           const new_activity: IActivity = {
             id: uuid(),
@@ -75,12 +82,14 @@ const CreateActivity: React.FC<IProps> = props => {
             city,
             venue
           };
-          dispatch(create_activity(new_activity));
-          dispatch(clear_current_activity());
-          props.history.push(`/activities/${new_activity.id}`);
+
+          console.log(new_activity);
+          // dispatch(create_activity(new_activity));
+          // dispatch(clear_current_activity());
+          // props.history.push(`/activities/${new_activity.id}`);
         }}
         render={formikBag => {
-          const { errors } = formikBag;
+          const { errors, setFieldValue } = formikBag;
           return (
             <div className="container">
               <Form>
@@ -90,7 +99,7 @@ const CreateActivity: React.FC<IProps> = props => {
                   </div>
                 </div>
                 <div className="row mt-25">
-                  <div className="input-field col m6 offset-m3">
+                  <div className="input-field custom-input-field col m6 offset-m3">
                     <Field
                       type="text"
                       id="title"
@@ -110,7 +119,7 @@ const CreateActivity: React.FC<IProps> = props => {
                 </div>
 
                 <div className="row">
-                  <div className="input-field col m6 offset-m3">
+                  <div className="input-field custom-input-field col m6 offset-m3">
                     <Field
                       component="textarea"
                       id="description"
@@ -134,27 +143,30 @@ const CreateActivity: React.FC<IProps> = props => {
                 </div>
 
                 <div className="row">
-                  <div className="input-field col m6 offset-m3">
-                    <Field
-                      type="text"
-                      id="category"
-                      name="category"
-                      className={errors.category ? "invalid" : ""}
-                    />
-                    <label htmlFor="category" className="active">
-                      Category
-                    </label>
-                    {errors.category && (
-                      <span
-                        className="helper-text"
-                        data-error={errors.category}
-                      ></span>
-                    )}
+                  <div className="input-field custom-input-field col m6 offset-m3">
+                    <div id="category_select">
+                      <Field
+                        value={"drinks"}
+                        name="category"
+                        as="select"
+                        placeholder="Category"
+                        onChange={(e: any) =>
+                          setFieldValue("category", e.target.value)
+                        }
+                      >
+                        <option value="drinks">Drinks</option>
+                        <option value="culture">Culture</option>
+                        <option value="film">Film</option>
+                        <option value="food">Food</option>
+                        <option value="music">Music</option>
+                        <option value="travel">Travel</option>
+                      </Field>
+                    </div>
                   </div>
                 </div>
 
                 <div className="row">
-                  <div className="input-field col m6 offset-m3">
+                  <div className="input-field custom-input-field col m6 offset-m3">
                     <Field
                       name="date"
                       className={errors.date ? "invalid" : ""}
@@ -174,7 +186,7 @@ const CreateActivity: React.FC<IProps> = props => {
                 </div>
 
                 <div className="row">
-                  <div className="input-field col m6 offset-m3">
+                  <div className="input-field custom-input-field col m6 offset-m3">
                     <Field
                       type="text"
                       id="city"
@@ -194,7 +206,7 @@ const CreateActivity: React.FC<IProps> = props => {
                 </div>
 
                 <div className="row">
-                  <div className="input-field col m6 offset-m3">
+                  <div className="input-field custom-input-field col m6 offset-m3">
                     <Field
                       type="text"
                       id="venue"

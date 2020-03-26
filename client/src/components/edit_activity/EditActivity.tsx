@@ -106,7 +106,7 @@ const EditActivity: React.FC<IProps> = props => {
                 </div>
               </div>
               <div className="row mt-25">
-                <div className="input-field col m6 offset-m3">
+                <div className="input-field custom-input-field col m6 offset-m3">
                   <Field
                     type="text"
                     id="title"
@@ -126,7 +126,7 @@ const EditActivity: React.FC<IProps> = props => {
               </div>
 
               <div className="row">
-                <div className="input-field col m6 offset-m3">
+                <div className="input-field custom-input-field col m6 offset-m3">
                   <Field
                     component="textarea"
                     id="description"
@@ -150,7 +150,7 @@ const EditActivity: React.FC<IProps> = props => {
               </div>
 
               <div className="row">
-                <div className="input-field col m6 offset-m3">
+                <div className="input-field custom-input-field col m6 offset-m3">
                   <Field
                     type="text"
                     id="category"
@@ -170,7 +170,7 @@ const EditActivity: React.FC<IProps> = props => {
               </div>
 
               <div className="row">
-                <div className="input-field col m6 offset-m3">
+                <div className="input-field custom-input-field col m6 offset-m3">
                   <Field
                     name="date"
                     className={errors.date ? "invalid" : ""}
@@ -190,7 +190,7 @@ const EditActivity: React.FC<IProps> = props => {
               </div>
 
               <div className="row">
-                <div className="input-field col m6 offset-m3">
+                <div className="input-field custom-input-field col m6 offset-m3">
                   <Field
                     type="text"
                     id="city"
@@ -210,7 +210,7 @@ const EditActivity: React.FC<IProps> = props => {
               </div>
 
               <div className="row">
-                <div className="input-field col m6 offset-m3">
+                <div className="input-field custom-input-field col m6 offset-m3">
                   <Field
                     type="text"
                     id="venue"

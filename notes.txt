@@ -142,6 +142,11 @@ protected override void OnModelCreating(ModelBuilder builder)
 
 dotnet ef migrations add SeedValues -p Persistence/ -s API/
 
+// Re-Seeding DB
+dotnet ef database drop -p Persistence/ -s API/
+cd API
+dotnet run watch
+
 
 // Using Dependency Injection
 
